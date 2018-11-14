@@ -93,6 +93,60 @@ Not a theoretical problem:
 
 ---
 
+# Tools
+
+* diffoscope
+* disorderfs
+* reprotest
+* strip-nondeterminism
+
+???
+
+* diffoscope - file diff++
+* disorderfs - a FUSE fs which introduces non-determinism
+* reprotest- build packages twice in different environments
+* strip-nondeterminism - build system tool to strip some sorts of non determinism
+used by Debian
+
+---
+
+# diffoscope
+
+Also known as diff on steroids
+
+
+```bash
+$ diffoscope awesome-4.2-1-x86_64.pkg.tar.xz /tmp/awesome-4.2-1-x86_64.pkg.tar.xz
+│ │      <h3>See also:</h3>
+│ │      <ul>
+│ │ -         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+│ │ -         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+│ │ +         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+│ │ +         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
+│ │      </ul>
+```
+
+https://try.diffoscope.org
+
+???
+
+Diffs two files with support for a lot of formats which are automatically 'unpacked' in the most
+convenient format.
+
+---
+
+# reprotest
+
+Builds binaries twice with different variations.
+
+https://packages.debian.org/sid/reprotest
+
+???
+
+Variations such as time, buildpath, disorderfs.
+
+---
+
 # 6. Arch and Debian
 
     </textarea>
