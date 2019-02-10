@@ -154,6 +154,80 @@ Variations such as time, buildpath, disorderfs.
 
 # 6. Arch and Debian
 
+* Both have a torture test setup with over 75% reproducible
+* Variations differ between distro's
+* Focus on user-end-verification
+
+---
+
+# End user verification
+
+1. $Distro builds a package
+2. Rebuilders verify that the package is reproducible
+3. Integration in your package manager
+4. Fail installation if a package is not reproducible
+
+---
+
+# End user verification integration
+
+```bash
+$ apt install python-pywt-doc
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+python-pywt-doc
+0 upgraded, 1 newly installed, 0 to remove and 4 not upgrad
+Need to get 102 kB of archives.
+After this operation, 978 kB of additional disk space will
+WARNING: The following packages are not reproducible!
+python-pywt-doc
+Install these packages anyway? [y/N]
+```
+
+---
+
+# Debian
+
+* Toolchain fixes (GCC, Go, R)
+* Packages must be reproducible in a future Debian policy
+* Not comparing packages against the archive
+* Debian images are not reproducible [#900918](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=900918)
+
+
+???
+
+* GCC recording buildpath
+* Go?
+* R?
+
+---
+
+# Related projects
+
+* [Bootstrappable builds](https://bootstrappable.org/)
+* Reproducible PyPi/Java env.
+* F-droid reprodicuble APK's
+* [in-toto](https://in-toto.github.io)
+
+???
+
+- Bootstrapping languages / OS system from a minimal set of binaries.
+- Reproducing Language ecosystems
+- Reproducing APK's
+- framework to secure the integrity of software supply chains
+
+---
+
+# Get involved
+
+Visit:  [reproducible-builds.org](https://reproducible-builds.org)
+Follow: @ReproBuilds on Twitter
+Join:   #reproducible-builds (OFTC)
+
+---
+
     </textarea>
     <script src="js/remark-0.14.1.min.js">
     </script>
