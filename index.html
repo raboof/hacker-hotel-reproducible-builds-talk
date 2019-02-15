@@ -131,14 +131,12 @@ Also known as diff on steroids
 
 
 ```bash
-$ diffoscope awesome-4.2-1-x86_64.pkg.tar.xz /tmp/awesome-4.2-1-x86_64.pkg.tar.xz
-│ │      <h3>See also:</h3>
-│ │      <ul>
-│ │ -         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
-│ │ -         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
-│ │ +         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
-│ │ +         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
-│ │      </ul>
+$ diffoscope badge-firmware.bin /tmp/badge-firmware.bin
+│ │       00055f10: 4275 696c 7420 6f6e  test....Built on
+│ │       00055f20: 2032 3031 392c 2031  : Feb 13 2019, 1
+│ │     - 00055f30: 496e 6974 6961 6c69  5:48:24.Initiali
+│ │     + 00055f30: 496e 6974 6961 6c69  5:44:34.Initiali
+│ │       00055f40: 2074 6573 7469 6e67  zing and testing
 ```
 
 https://try.diffoscope.org
@@ -172,7 +170,7 @@ Variations such as time, buildpath, disorderfs.
 
 # End user verification
 
-1. $Distro builds a package
+1. $distro builds a package
 2. Rebuilders verify that the package is reproducible
 3. Integration in your package manager
 4. Fail installation if a package is not reproducible
@@ -208,7 +206,7 @@ Install these packages anyway? [y/N]
 
 ???
 
-* GCC recording buildpath
+* GCC recording buildpath/PGO
 * Go?
 * R?
 
