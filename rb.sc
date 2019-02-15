@@ -93,13 +93,26 @@ ${rows.map { row =>
   """
 }
 
-val process: Page = Page(
+val processRows: List[Row] = 
+  model.map(step => Row(step.name, step.objectives, Nil))
+
+def fragment[T](in: List[T]): List[List[T]] =
+  in.foldLeft(List.empty[List[T]]){
+    case (Nil, elem) => List(List(elem))
+    case (acc, elem) => acc :+ (acc.last :+ elem)
+  }
+
+val processModelFragmented: List[List[Row]] =
+  fragment[Row](processRows)
+
+val process: List[Page] = processModelFragmented.map(rows => Page(
   "OSS Development and Distribution",
   "Steps",
   "",
-  model.map(step => Row(step.name, step.objectives, Nil))
-)
+  rows
+))
 
+ 
 //val threatModel: Page =
 //  Page(
 //    "Threat model",
@@ -146,4 +159,4 @@ val mitigationsPages: List[Page] =
     Page("Threat model", "Threats", "Mitigations", steps.map(step => Row(step.name, step.left, step.mitigations)))
   )
 
-println((process +: (threatModelPages ++ mitigationsPages)).mkString("\n---\n"))
+println((process ++ threatModelPages ++ mitigationsPages).mkString("\n---\n"))
