@@ -15,7 +15,7 @@ case class Step(
 
 val model = List(
   Step(
-    "Developers write code",
+    "&#x2460; &#x1F58B;&#xFE0F; Developers write code",
     List(
       "Malicious contributors",
       "Blackmail, coercion",
@@ -27,7 +27,7 @@ val model = List(
     )
   ),
   Step(
-    "Commit to Source Control",
+    "&#x2461; &#x1F333; Commit to Source Control",
     List(
       "Compromised SCM hosting"
     ),
@@ -39,7 +39,7 @@ val model = List(
     )
   ),
   Step(
-    "Built and packaged",
+    "&#x2462; &#x1F3D7;&#xFE0F; Built and packaged",
     List(
       "Malicious dependencies/plugins",
       "Compromised build machine",
@@ -50,15 +50,15 @@ val model = List(
     )
   ),
   Step(
-    "Package is distributed",
+    "&#x2463; &#x1F6A2; Package is distributed",
     List("Compromised distribution infra"),
     List("Signatures") // unsolved, but out of scope
   ),
   Step(
-    "User runs software",
+    "&#x2464; &#x1F60D; User runs software",
     List(),
     List(),
-    List("No malicious code here"),
+    List("&#x1F945; No malicious code here"),
   )
 )
 
