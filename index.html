@@ -1535,11 +1535,26 @@ Variations such as time, buildpath, disorderfs.
 
 ---
 
-# 6. Arch and Debian
+# 6. Test framework
 
-* Both have a torture test setup with over 75% reproducible
-* Variations differ between distro's
-* Focus on user-end-verification
+* Torture test setup with over 75% reproducible
+* Hardware sponsored by various projects
+* Different distro's tested such as Arch, Coreboot, OpenWrt, Debian and F-Droid.
+
+---
+
+# Reproducible Build Test Env.
+
+* Builds packages twice with [different env's](https://tests.reproducible-builds.org/debian/index_variations.html)
+* [Debian test statistics](https://tests.reproducible-builds.org/debian/reproducible.html)
+
+![Debian unstable reproducible build status](assets/test_repro_status.png)
+
+???
+
+Variations such as:
+* LANG, BUILDUSER, gid, uid, buildpath, kernel
+* CPU type, year, timezone, fs
 
 ---
 
@@ -1571,7 +1586,7 @@ Install these packages anyway? [y/N]
 
 ---
 
-# Debian
+# Debian Future
 
 * Toolchain fixes (GCC, Go, R)
 * Packages must be reproducible in a future Debian policy
@@ -1591,7 +1606,7 @@ Install these packages anyway? [y/N]
 
 * [Bootstrappable builds](https://bootstrappable.org/)
 * Reproducible PyPi/Java env.
-* F-droid reprodicuble APK's
+* [F-droid reprodicuble APK's](https://f-droid.org/en/docs/Reproducible_Builds/)
 * [in-toto](https://in-toto.github.io)
 
 ???
@@ -1605,9 +1620,9 @@ Install these packages anyway? [y/N]
 
 # Get involved
 
-Visit:  [reproducible-builds.org](https://reproducible-builds.org)
-Follow: @ReproBuilds on Twitter
-Join:   #reproducible-builds (OFTC)
+* Visit:  [reproducible-builds.org](https://reproducible-builds.org)
+* Follow: @ReproBuilds on Twitter
+* Join:   #reproducible-builds (OFTC)
 
 ---
 
