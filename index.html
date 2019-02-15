@@ -1491,7 +1491,45 @@ TODO Arnout: verder invullen.
 * Build paths
 * Timestamps
 * Non-determinismistic file ordering
+* Private keys/seeds
 * Users, groups, umask, environment variables, etc.
+
+---
+
+# Timestamps
+
+```bash
+- V2.0-000..Wed·Feb·13·23:10:22·20
++ V2.0-000..Wed·Mar·18·05:31:03·20
+```
+
+---
+
+# File ordering
+
+```bash
+ return (
+-	'/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/server',
+-	'/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/jli',
+  '/usr/lib/jvm/java-8-openjdk/jre/lib/amd64',
++	'/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/jli',
++	'/usr/lib/jvm/java-8-openjdk/jre/lib/amd64/server',
+ )
+```
+
+---
+
+# Security issues
+
+```bash
+ -----BEGIN·ENCRYPTED·PRIVATE·KEY-----
++MIIFHDBOBgkqhkiG9w0BBQ0wQTApBgkqhkiG9w0BBQwwHAQI0/5drUh0S3YCAggA
+-MAwGCCqGSIb3DQIJBQAwFAYIKoZIhvcNAwcECIgvZNbQ0E21BIIEyEgCux5EHHU1
+```
+
+```bash
+'OpenIDConsumerSecret' => '639098210478536',
+```
 
 ---
 
