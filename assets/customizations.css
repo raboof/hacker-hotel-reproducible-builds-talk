@@ -1,3 +1,6 @@
 .navbar img {
   height: 30px
 }
+td {
+  vertical-align: top
+}

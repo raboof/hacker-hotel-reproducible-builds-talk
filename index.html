@@ -37,7 +37,7 @@ layout: true
 
 # Agenda
 
-1. Attacking OSS distribution
+1. Attacks on OSS distribution
 2. Defending: Reproducible Builds
 3. Other advantages
 4. In practice
@@ -46,7 +46,1389 @@ layout: true
 
 ---
 
-# 1. Attacking OSS distribution
+# 1. Attacks on OSS distribution
+
+---
+
+## Risk Analysis
+
+Should we care? Would attacks on OSS have impact?
+
+???
+
+TODO Arnout: before we start talking about securing the OSS build and
+distribution pipeline, let's talk about whether it is worth it. Spoiler
+alert: we think it is.
+
+Show of hands: who is developer? uses OSS? professionally?
+
+Quote Black Duck survey on OSS in bigcorp's
+
+---
+
+## Risk Analysis
+
+Should we care? Are OSS developers being targeted?
+
+???
+
+---
+
+## 
+
+![Homebrew hack](assets/homebrew.png)
+
+![nodejs hack](assets/nodejs.png)
+
+???
+
+Not a theoretical problem:
+
+* august 2018: someone gained access to credentials of Homebrew dev, 
+
+TODO Arnout: add nodejs event-stream thing
+
+Problem not unique to FLOSS: https://www.polygon.com/2018/7/30/17630664/steam-abstractism-cryptocurrency-mining - but FLOSS in unique position to combat it
+
+---
+
+<!-- start include -->
+
+OSS Development and Distribution
+
+<table>
+<tr><th>Steps</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th></th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+<li>Signed commits</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+<li>Signed commits</li>
+<li>Detect 'rewriting history'</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+<li>Signed commits</li>
+<li>Detect 'rewriting history'</li>
+<li>Audits</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+<li>Signed commits</li>
+<li>Detect 'rewriting history'</li>
+<li>Audits</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Transitive verification</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+<li>Signed commits</li>
+<li>Detect 'rewriting history'</li>
+<li>Audits</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Transitive verification</li>
+<li>!!!</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+---
+
+Threat model
+
+<table>
+<tr><th>Threats</th><th>Mitigations</th></tr>
+
+<tr><td>
+Developers write code
+<ul>
+<li>Malicious contributors</li>
+<li>Blackmail, coercion</li>
+<li>Compromised dev machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Cannot be prevented</li>
+<li>Can we still improve trust?</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Commit to Source Control
+<ul>
+<li>Compromised SCM hosting</li>
+</ul>
+</td><td>
+<ul>
+<li>Signed commits</li>
+<li>Detect 'rewriting history'</li>
+<li>Audits</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Built and packaged
+<ul>
+<li>Malicious dependencies/plugins</li>
+<li>Compromised build machine</li>
+</ul>
+</td><td>
+<ul>
+<li>Transitive verification</li>
+<li>!!!</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Uploaded to distribution infra
+<ul>
+
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+
+<tr><td>
+Downloaded by user
+<ul>
+<li>Compromised distribution infra</li>
+</ul>
+</td><td>
+<ul>
+<li>Signatures</li>
+</ul>
+</td></tr>
+   
+
+<tr><td>
+User runs software
+<ul>
+<li>No malicious code here</li>
+</ul>
+</td><td>
+<ul>
+
+</ul>
+</td></tr>
+   
+</table>
+  
+
+<!-- end include -->
 
 ---
 
@@ -60,24 +1442,13 @@ layout: true
 
 Not a new problem: envisioned in 1984 by inventor of Unix
 
----
-
-![Homebrew hack](assets/homebrew.png)
-
-![nodejs hack](assets/nodejs.png)
-
-???
-
-Not a theoretical problem:
-
-* august 2018: someone gained access to credentials of Homebrew dev, 
-
-
-
+TODO Arnout: hoort dit wel hier?
 
 ---
 
 # 2. Defending: Reproducible Builds
+
+TODO Arnout: uitleggen wat RB is, plaatjes
 
 ---
 
@@ -87,6 +1458,10 @@ Not a theoretical problem:
 * Less rebuilds due to caching results since they are the same.
 * Bugs found in packages when building in different environments.
 * Builds which fail X% of the time.
+
+???
+
+TODO Arnout: verder invullen.
 
 ---
 
