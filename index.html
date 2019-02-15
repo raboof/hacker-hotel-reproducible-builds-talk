@@ -1454,7 +1454,14 @@ TODO Arnout: uitleggen wat RB is, plaatjes
 
 # 3. Other advantages
 
-TODO Arnout: invullen.
+* Detect security issues (private key generation on build).
+* Less rebuilds due to caching results since they are the same.
+* Bugs found in packages when building in different environments.
+* Builds which fail X% of the time.
+
+???
+
+TODO Arnout: verder invullen.
 
 ---
 
@@ -1466,7 +1473,145 @@ TODO Arnout: invullen.
 
 ---
 
+# Problems
+
+* Dictionary/hash/database ordering
+* Build paths
+* Timestamps
+* Non-determinismistic file ordering
+* Users, groups, umask, environment variables, etc.
+
+---
+
+# Tools
+
+* diffoscope
+* disorderfs
+* reprotest
+* strip-nondeterminism
+
+???
+
+* diffoscope - file diff++
+* disorderfs - a FUSE fs which introduces non-determinism
+* reprotest- build packages twice in different environments
+* strip-nondeterminism - build system tool to strip some sorts of non determinism
+used by Debian
+
+---
+
+# diffoscope
+
+Also known as diff on steroids
+
+
+```bash
+$ diffoscope awesome-4.2-1-x86_64.pkg.tar.xz /tmp/awesome-4.2-1-x86_64.pkg.tar.xz
+│ │      <h3>See also:</h3>
+│ │      <ul>
+│ │ -         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+│ │ -         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+│ │ +         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+│ │ +         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
+│ │      </ul>
+```
+
+https://try.diffoscope.org
+
+???
+
+Diffs two files with support for a lot of formats which are automatically 'unpacked' in the most
+convenient format.
+
+---
+
+# reprotest
+
+Builds binaries twice with different variations.
+
+https://packages.debian.org/sid/reprotest
+
+???
+
+Variations such as time, buildpath, disorderfs.
+
+---
+
 # 6. Arch and Debian
+
+* Both have a torture test setup with over 75% reproducible
+* Variations differ between distro's
+* Focus on user-end-verification
+
+---
+
+# End user verification
+
+1. $Distro builds a package
+2. Rebuilders verify that the package is reproducible
+3. Integration in your package manager
+4. Fail installation if a package is not reproducible
+
+---
+
+# End user verification integration
+
+```bash
+$ apt install python-pywt-doc
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+python-pywt-doc
+0 upgraded, 1 newly installed, 0 to remove and 4 not upgrad
+Need to get 102 kB of archives.
+After this operation, 978 kB of additional disk space will
+WARNING: The following packages are not reproducible!
+python-pywt-doc
+Install these packages anyway? [y/N]
+```
+
+---
+
+# Debian
+
+* Toolchain fixes (GCC, Go, R)
+* Packages must be reproducible in a future Debian policy
+* Not comparing packages against the archive
+* Debian images are not reproducible [#900918](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=900918)
+
+
+???
+
+* GCC recording buildpath
+* Go?
+* R?
+
+---
+
+# Related projects
+
+* [Bootstrappable builds](https://bootstrappable.org/)
+* Reproducible PyPi/Java env.
+* F-droid reprodicuble APK's
+* [in-toto](https://in-toto.github.io)
+
+???
+
+- Bootstrapping languages / OS system from a minimal set of binaries.
+- Reproducing Language ecosystems
+- Reproducing APK's
+- framework to secure the integrity of software supply chains
+
+---
+
+# Get involved
+
+Visit:  [reproducible-builds.org](https://reproducible-builds.org)
+Follow: @ReproBuilds on Twitter
+Join:   #reproducible-builds (OFTC)
+
+---
 
     </textarea>
     <script src="js/remark-0.14.1.min.js">
