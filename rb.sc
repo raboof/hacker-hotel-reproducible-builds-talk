@@ -62,39 +62,29 @@ val model = List(
   )
 )
 
-case class Row(
-              name: String,
-              left: List[String],
-              right: List[String]
-              )
+case class Section(
+  name: String,
+  bullets: List[String],
+)
 
-case class Page(name: String, leftHead: String, rightHead: String, rows: List[Row]) {
+case class Page(name: String, sections: List[Section]) {
   override def toString =
   s"""
-$name
+# $name
 
-<table>
-<tr><th>$leftHead</th><th>$rightHead</th></tr>
-${rows.map { row =>
+${sections.map { section =>
   s"""
-     |<tr><td>
-     |${row.name}
-     |<ul>
-     |${row.left.map(line => s"<li>$line</li>").mkString("\n")}
-     |</ul>
-     |</td><td>
-     |<ul>
-     |${row.right.map(line => s"<li>$line</li>").mkString("\n")}
-     |</ul>
-     |</td></tr>
+     |${section.name}
+     |
+     |${section.bullets.map(line => s"* $line").mkString("\n")}
+     |
    """.stripMargin
 }.mkString("\n")}
-</table>
   """
 }
 
-val processRows: List[Row] = 
-  model.map(step => Row(step.name, step.objectives, Nil))
+val processSections: List[Section] = 
+  model.map(step => Section(step.name, step.objectives))
 
 def fragment[T](in: List[T]): List[List[T]] =
   in.foldLeft(List.empty[List[T]]){
@@ -102,16 +92,18 @@ def fragment[T](in: List[T]): List[List[T]] =
     case (acc, elem) => acc :+ (acc.last :+ elem)
   }
 
-val processModelFragmented: List[List[Row]] =
-  fragment[Row](processRows)
+val processModelFragmented: List[List[Section]] =
+  fragment[Section](processSections)
 
-val process: List[Page] = processModelFragmented.map(rows => Page(
+val process: Page = Page(
   "OSS Development and Distribution",
-  "Steps",
-  "",
-  rows
+  model.map(step => Section(step.name, step.objectives))
+)
+ 
+val processFragmented: List[Page] = processModelFragmented.map(sections => Page(
+  "OSS Development and Distribution",
+  sections
 ))
-
  
 //val threatModel: Page =
 //  Page(
@@ -134,11 +126,10 @@ val threatModelFragmented: List[List[Step]] = {
   fragment(model)
 }
 
-val threatModelPages =
-  threatModelFragmented.map(steps =>
-    Page("Threat model", "Threats", "", steps.map(step => Row(step.name, step.left, List.empty)))
-  )
-
+//val threatModelPages =
+//  threatModelFragmented.map(steps =>
+//    Page("Threat model", steps.map(step => Row(step.name, step.left, List.empty)))
+//  )
 
 val mitigationsFragmented: List[List[Step]] = {
   def removeLast(step: List[Step]): List[Step] = {
@@ -154,9 +145,29 @@ val mitigationsFragmented: List[List[Step]] = {
   fragment(model)
 }
 
-val mitigationsPages: List[Page] =
-  mitigationsFragmented.map(steps =>
-    Page("Threat model", "Threats", "Mitigations", steps.map(step => Row(step.name, step.left, step.mitigations)))
-  )
+def threats(step: Step): List[Page] =
+  fragment(step.threats)
+    .map(threats => Page(
+      step.name,
+      List(Section("Threats", threats))
+      ))
 
-println((process ++ threatModelPages ++ mitigationsPages).mkString("\n---\n"))
+def mitigations(step: Step): List[Page] =
+  fragment(step.mitigations)
+    .map(mitigations => Page(
+      step.name,
+      List(
+        Section("Threats", step.threats),
+        Section("Mitigations", mitigations)
+      ))
+    )
+
+def threatsAndMitigations(step: Step): List[Page] =
+  threats(step) ++ mitigations(step)
+
+//val mitigationsPages: List[Page] =
+//  mitigationsFragmented.map(steps =>
+//    Page("Threat model", "Mitigations", steps.map(step => Row(step.name, step.left, step.mitigations)))
+//  )
+
+println((processFragmented ++ model.flatMap(threatsAndMitigations(_)) :+ process).mkString("\n---\n"))
