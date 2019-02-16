@@ -34,7 +34,7 @@ val model = List(
     List(
       "Signed commits",
       "Detect 'rewriting history'",
-      "Audits", // automatic and manual
+      "Audits.", // automatic and manual
       // Anyone can do this!
     )
   ),
@@ -52,7 +52,7 @@ val model = List(
   Step(
     "&#x2463; &#x1F6A2; Package is distributed",
     List("Compromised distribution infra"),
-    List("Signatures") // unsolved, but out of scope
+    List("Signatures.") // unsolved, but out of scope
   ),
   Step(
     "&#x2464; &#x1F60D; User runs software",
@@ -88,7 +88,7 @@ val processSections: List[Section] =
 
 def fragment[T](in: List[T]): List[List[T]] =
   in.foldLeft(List.empty[List[T]]){
-    case (Nil, elem) => List(List(elem))
+    case (Nil, elem) => List(List.empty[T], List(elem))
     case (acc, elem) => acc :+ (acc.last :+ elem)
   }
 
@@ -112,20 +112,20 @@ val processFragmented: List[Page] = processModelFragmented.map(sections => Page(
 //    "",
 //    model.map(step => Row(step.name, step.left, List.empty)))
 
-val threatModelFragmented: List[List[Step]] = {
-  def removeLast(step: List[Step]): List[Step] = {
-    if (step.last.threats.isEmpty) removeLast(step.init) :+ step.last
-    else step.init :+ step.last.copy(threats = step.last.threats.init)
-  }
-  def fragment(steps: List[Step]): List[List[Step]] = {
-    if (steps.flatMap(_.threats).isEmpty)
-      Nil
-    else
-      fragment(removeLast(steps)) :+ steps
-  }
-  fragment(model)
-}
-
+//val threatModelFragmented: List[List[Step]] = {
+//  def removeLast(step: List[Step]): List[Step] = {
+//    if (step.last.threats.isEmpty) removeLast(step.init) :+ step.last
+//    else step.init :+ step.last.copy(threats = step.last.threats.init)
+//  }
+//  def fragment(steps: List[Step]): List[List[Step]] = {
+//    if (steps.flatMap(_.threats).isEmpty)
+//      Nil
+//    else
+//      fragment(removeLast(steps)) :+ steps
+//  }
+//  fragment(model)
+//}
+//
 //val threatModelPages =
 //  threatModelFragmented.map(steps =>
 //    Page("Threat model", steps.map(step => Row(step.name, step.left, List.empty)))
