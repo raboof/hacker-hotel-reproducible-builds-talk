@@ -741,14 +741,43 @@ Mitigations
 
 # 3. Other advantages
 
-* Detect security issues (private key generation on build).
-* Less rebuilds due to caching results since they are the same.
-* Bugs found in packages when building in different environments.
-* Builds which fail X% of the time.
+---
 
-???
+# 3. Other advantages
 
-TODO Arnout: verder invullen.
+Detect security issues (private key generation/seed on build).
+
+* Static private key generated on build
+* Seed initialized on build
+
+---
+
+# 3. Other advantages
+
+Less rebuilds due to caching results since they are the same.
+
+---
+
+# 3. Other advantages
+
+Bugs found in packages when building in different environments.
+
+* Locale differences
+* Shell specific
+
+* du -ks --apparent-size differs between filesystems (btrfs/ext4/tmpfs)
+```bash
+│ │ -size = 980992
+│ │ +size = 1000448
+```
+
+---
+
+
+# 3. Other advantages
+
+Builds which fail X% of the time.
+
 
 ---
 
