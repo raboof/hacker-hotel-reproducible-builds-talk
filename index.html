@@ -42,7 +42,9 @@ layout: true
 3. Other advantages
 4. In practice
 5. Problems & Tools
-6. Arch and Debian
+6. Test Framework
+7. Future
+8. Questions
 
 ---
 
@@ -634,6 +636,12 @@ How hard can it be to reproduce software?
 
 ---
 
+# 4. In practice
+
+First Debian rebuild in 2013 24% packages reproducible
+
+---
+
 # 5. Problems & Tools
 
 ---
@@ -746,9 +754,19 @@ Variations such as time, buildpath, disorderfs.
 
 ---
 
-# Reproducible Build Test Env.
+# Reproducible Build Testing
 
-* Builds packages twice with [different env's](https://tests.reproducible-builds.org/debian/index_variations.html)
+Builds packages twice with [different env's](https://tests.reproducible-builds.org/debian/index_variations.html):
+* env vars: LANG, BUILDUSER,..
+* gid/uid
+* buildpath
+* kernel
+* CPU type
+
+---
+
+# Repro. Build Test Website
+
 * [Debian test statistics](https://tests.reproducible-builds.org/debian/reproducible.html)
 
 ![Debian unstable reproducible build status](assets/test_repro_status.png)
@@ -758,6 +776,24 @@ Variations such as time, buildpath, disorderfs.
 Variations such as:
 * LANG, BUILDUSER, gid, uid, buildpath, kernel
 * CPU type, year, timezone, fs
+
+---
+
+# 7. Future
+
+* Toolchain fixes (GCC, Go, R)
+* Packages must be reproducible in a future Debian policy
+* Not comparing packages against the archive
+* Debian images are not reproducible [#900918](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=900918)
+* Package manager integration
+
+
+???
+
+* Debian
+* GCC recording buildpath/PGO
+* Go?
+* R?
 
 ---
 
@@ -786,22 +822,6 @@ WARNING: The following packages are not reproducible!
 python-pywt-doc
 Install these packages anyway? [y/N]
 ```
-
----
-
-# Debian Future
-
-* Toolchain fixes (GCC, Go, R)
-* Packages must be reproducible in a future Debian policy
-* Not comparing packages against the archive
-* Debian images are not reproducible [#900918](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=900918)
-
-
-???
-
-* GCC recording buildpath/PGO
-* Go?
-* R?
 
 ---
 
